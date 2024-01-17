@@ -17,4 +17,6 @@ public interface RestaurantService {
 	
 	public Optional<Restaurant> updateRestaurantById(Long id, Restaurant restaurant);
 	
+	public Optional<List<Restaurant>> searchRestaurantByNameOrLocation(String name, String location);
+	
 }

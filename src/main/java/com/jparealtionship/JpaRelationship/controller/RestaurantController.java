@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jparealtionship.JpaRelationship.entity.Menu;
@@ -76,6 +77,18 @@ public class RestaurantController {
 	public ResponseEntity<Optional<Restaurant>> updateRestaurantById(@PathVariable("id") Long id,
 			@RequestBody Restaurant restaurant) {
 		return ResponseEntity.ok().body(restaurantService.updateRestaurantById(id, restaurant));
+	}
+
+	@GetMapping("/search")
+	public ResponseEntity<Optional<List<Restaurant>>> searchRestaurantByNameOrLocation(
+			@RequestParam(value = "name", defaultValue = "", required = false) String name,
+			@RequestParam(value = "location", defaultValue = "", required = false) String location) {
+		Optional<List<Restaurant>> optionalRestaurant = restaurantService.searchRestaurantByNameOrLocation(name, location);
+		if (optionalRestaurant != null) {
+			return ResponseEntity.ok(optionalRestaurant);
+		} else {
+			return ResponseEntity.notFound().build();
+		}
 	}
 
 }

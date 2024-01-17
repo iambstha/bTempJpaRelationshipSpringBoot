@@ -72,8 +72,9 @@ public class MenuItemServiceImpl implements MenuItemService {
 				existingMenuItem.setDietaryInfo(menuItem.getDietaryInfo());
 			}
 
-			menuItemRepository.save(existingMenuItem);
+			MenuItem updatedMenuItem = menuItemRepository.save(existingMenuItem);
 
+			return Optional.of(updatedMenuItem);
 		}
 		return Optional.empty();
 	}

@@ -47,7 +47,6 @@ public class MenuServiceImpl implements MenuService {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-
 			return false;
 		}
 	}
@@ -64,7 +63,8 @@ public class MenuServiceImpl implements MenuService {
 				existingMenu.setMenuItems(menu.getMenuItems());
 			}
 
-			menuRepository.save(existingMenu);
+			Menu updatedMenu = menuRepository.save(existingMenu);
+			return Optional.ofNullable(updatedMenu);
 
 		}
 		return Optional.empty();

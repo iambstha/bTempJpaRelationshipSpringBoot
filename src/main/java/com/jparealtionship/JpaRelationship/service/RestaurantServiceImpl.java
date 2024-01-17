@@ -74,4 +74,10 @@ public class RestaurantServiceImpl implements RestaurantService {
 		}
 	}
 
+	@Override
+	public Optional<List<Restaurant>> searchRestaurantByNameOrLocation(String name, String location) {
+		List<Restaurant> optionalRestaurant = restaurantRepository.searchRestaurant(name, location);
+		return Optional.of(optionalRestaurant);
+	}
+
 }
